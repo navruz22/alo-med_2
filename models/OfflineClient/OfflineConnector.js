@@ -19,6 +19,7 @@ const connector = new Schema(
         ],
         products: [{ type: Schema.Types.ObjectId, ref: 'OfflineProduct' }],
         probirka: { type: Number, default: 0 },
+        addedByDoctor: {type: Boolean, default: false},
         accept: { type: Boolean, default: false },
         totalprice: { type: Number },
         payments: [{ type: Schema.Types.ObjectId, ref: 'OfflinePayment' }],

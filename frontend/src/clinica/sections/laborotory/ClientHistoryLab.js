@@ -134,7 +134,7 @@ const Print = ({ client, connector, sections, baseUrl, clinica }) => {
                                 }}
                             >
                                 <h4 className='text-[20px]'>
-                                    {connector?.client && connector?.client.lastname + " " + connector?.client.firstname}
+                                    {connector?.client && connector?.client.fullname}
                                 </h4>
                             </td>
                             <td rowSpan="2" colSpan={2} style={{ width: "33%" }}>

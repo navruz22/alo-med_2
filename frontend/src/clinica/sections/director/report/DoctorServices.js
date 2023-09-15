@@ -229,9 +229,7 @@ const DoctorServices = () => {
                                                         {currentPage * countPage + key + 1}
                                                     </td>
                                                     <td className="border py-1 text-[16px] font-weight-bold">
-                                                        {service.client.lastname +
-                                                            " " +
-                                                            service.client.firstname}
+                                                        {service?.client?.fullname}
                                                     </td>
                                                     <td className="border py-1 text-[16px] text-center">
                                                         {service?.service?.name}

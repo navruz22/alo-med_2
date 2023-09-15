@@ -1,15 +1,7 @@
 export const checkClientData = (client, t) => {
-  if (!client.firstname) {
+  if (!client.fullname) {
     return {
       title: t('Diqqat! Mijoz ismi kiritilmagan.'),
-      description: '',
-      status: 'error',
-    }
-  }
-
-  if (!client.lastname) {
-    return {
-      title: t('Diqqat! Mijoz familiyasi kiritilmagan.'),
       description: '',
       status: 'error',
     }

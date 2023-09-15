@@ -18,7 +18,8 @@ export const ClinicasTable = ({
     setRegisterType,
     setClinicaId,
     setModal,
-    changeIsCreateUser
+    changeIsCreateUser,
+    changeIsVisibleCashier
 }) => {
     return (
         <div className="border-0 table-container">
@@ -66,6 +67,7 @@ export const ClinicasTable = ({
                                 </th>
                                 <th className='border py-1 bg-alotrade text-[16px]'>Tel</th>
                                 <th className='border py-1 bg-alotrade text-[16px]'>Yaratilgan vaqti</th>
+                                <th className='border py-1 bg-alotrade text-[16px]'>Kassa</th>
                                 <th className='border py-1 bg-alotrade text-[16px]'>Sh.X.</th>
                                 <th className='border py-1 bg-alotrade text-[16px]'>Dir-or</th>
                                 <th className='border py-1 bg-alotrade text-[16px]'></th>
@@ -90,6 +92,16 @@ export const ClinicasTable = ({
                                         </td>
                                         <td className="border py-1 text-right text-[16px]">
                                             {new Date(connector.createdAt).toLocaleDateString()}
+                                        </td>
+                                        <td className="border py-1 text-right text-[16px]">
+                                            {/* <input type='checkbox' checked={connector?.isCreateUser}
+                                                onChange={() => changeIsCreateUser()} /> */}
+                                            <div className='flex flex-row justify-center items-center  pt-[1.25rem] pb-[1.25rem] pr-[.625rem] pl-[.625rem] gap-[1.25rem]'>
+                                                <div className='flex items-center gap-[.625rem]'>
+                                                    <input type='checkbox' checked={connector?.isVisibleCashier}
+                                                        onChange={() => changeIsVisibleCashier(connector?._id)} />
+                                                </div>
+                                            </div>
                                         </td>
                                         <td className="border py-1 text-right text-[16px]">
                                             {/* <input type='checkbox' checked={connector?.isCreateUser}

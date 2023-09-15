@@ -109,7 +109,7 @@ export const DoctorClients = () => {
           `/api/doctor/clients/getclients`,
           "POST",
           {
-            clinica: auth && auth.clinica._id,
+            clinica: auth && auth.clinica?._id,
             beginDay,
             endDay,
             department: auth?.user?.specialty?._id,
@@ -142,7 +142,7 @@ export const DoctorClients = () => {
           `/api/doctor/clients/statsionarclients/get`,
           "POST",
           {
-            clinica: auth && auth.clinica._id,
+            clinica: auth && auth.clinica?._id,
             beginDay,
             endDay,
             department: auth?.user?.specialty._id,
@@ -187,7 +187,7 @@ export const DoctorClients = () => {
         {
           clientborn: new Date(new Date(e)),
           department: auth?.user?.specialty,
-          clinica: auth && auth.clinica._id,
+          clinica: auth && auth.clinica?._id,
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -216,7 +216,7 @@ export const DoctorClients = () => {
         {
           clientborn: new Date(new Date(e)),
           department: auth?.user?.specialty,
-          clinica: auth && auth.clinica._id,
+          clinica: auth && auth.clinica?._id,
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -255,7 +255,7 @@ export const DoctorClients = () => {
         {
           name: fullname,
           department: auth?.user?.specialty?._id,
-          clinica: auth && auth.clinica._id,
+          clinica: auth && auth.clinica?._id,
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -283,7 +283,7 @@ export const DoctorClients = () => {
         {
           name: fullname,
           department: auth?.user?.specialty?._id,
-          clinica: auth && auth.clinica._id,
+          clinica: auth && auth.clinica?._id,
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -322,7 +322,7 @@ export const DoctorClients = () => {
         {
           clientId: clientId,
           department: auth?.user?.specialty?._id,
-          clinica: auth && auth.clinica._id,
+          clinica: auth && auth.clinica?._id,
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -350,7 +350,7 @@ export const DoctorClients = () => {
         {
           clientId: clientId,
           department: auth?.user?.specialty?._id,
-          clinica: auth && auth.clinica._id,
+          clinica: auth && auth.clinica?._id,
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -419,11 +419,11 @@ export const DoctorClients = () => {
         `/api/doctor/clients/service/add`,
         "POST",
         {
-          client: { ...client, clinica: auth.clinica._id },
-          connector: { ...connector, clinica: auth.clinica._id },
+          client: { ...client, clinica: auth.clinica?._id },
+          connector: { ...connector, clinica: auth.clinica?._id },
           services: [...newservices],
           products: [...newproducts],
-          clinica: auth && auth.clinica._id,
+          clinica: auth && auth.clinica?._id,
           user: auth?.user,
         },
         {
@@ -462,11 +462,11 @@ export const DoctorClients = () => {
         `/api/doctor/clients/statsionar/service/add`,
         "POST",
         {
-          client: { ...client, clinica: auth.clinica._id },
-          connector: { ...connector, clinica: auth.clinica._id },
+          client: { ...client, clinica: auth.clinica?._id },
+          connector: { ...connector, clinica: auth.clinica?._id },
           services: [...newservices],
           products: [...newproducts],
-          clinica: auth && auth.clinica._id
+          clinica: auth && auth.clinica?._id
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -504,12 +504,12 @@ export const DoctorClients = () => {
         `/api/offlineclient/client/connector/add`,
         "POST",
         {
-          client: { ...client, clinica: auth.clinica._id },
-          connector: { probirka: connector?.probirka, clinica: auth.clinica._id },
+          client: { ...client, clinica: auth.clinica?._id },
+          connector: { probirka: connector?.probirka, clinica: auth.clinica?._id },
           services: [...newservices],
           products: [...newproducts],
           // counterdoctor: counterdoctor,
-          // adver: { ...adver, clinica: auth.clinica._id },
+          // adver: { ...adver, clinica: auth.clinica?._id },
         },
         {
           Authorization: `Bearer ${auth.token}`,
@@ -629,7 +629,7 @@ export const DoctorClients = () => {
       const data = await request(
         `/api/services/department/reseption`,
         "POST",
-        { clinica: auth.clinica._id },
+        { clinica: auth.clinica?._id },
         {
           Authorization: `Bearer ${auth.token}`,
         }
@@ -685,7 +685,7 @@ export const DoctorClients = () => {
       const data = await request(
         `/api/services/product/getallreseption`,
         "POST",
-        { clinica: auth.clinica._id },
+        { clinica: auth.clinica?._id },
         {
           Authorization: `Bearer ${auth.token}`,
         }
@@ -716,7 +716,7 @@ export const DoctorClients = () => {
     let s = [];
     newproducts.map((product) => {
       return s.push({
-        clinica: auth.clinica._id,
+        clinica: auth.clinica?._id,
         reseption: auth.user._id,
         productid: product.product._id,
         product: product.product,
@@ -774,10 +774,10 @@ export const DoctorClients = () => {
     let s = [];
     services.map((service) => {
       if (service.department.probirka) {
-        setConnector({ ...connector, probirka: 1, clinica: auth.clinica._id });
+        setConnector({ ...connector, probirka: 1, clinica: auth.clinica?._id });
       }
       return s.push({
-        clinica: auth.clinica._id,
+        clinica: auth.clinica?._id,
         reseption: auth.user._id,
         serviceid: service.service._id,
         service: service.service,
@@ -941,7 +941,7 @@ export const DoctorClients = () => {
         const data = await request(
           `/api/offlineclient/client/after_client/get`,
           "POST",
-          { clinica: auth && auth.clinica._id },
+          { clinica: auth && auth.clinica?._id },
           {
             Authorization: `Bearer ${auth.token}`,
           }
@@ -1046,7 +1046,7 @@ export const DoctorClients = () => {
                   {t("Xizmat qo'shish")}
                 </button>
               </div>
-              {!auth?.user?.isOne && <div className="col-6 text-end flex justify-between gap-4">
+              {/* {!auth?.user?.isOne && <div className="col-6 text-end flex justify-between gap-4">
                 <button
                   className={`btn bg-alotrade text-white mb-2 w-100`}
                   onClick={() => changeListType('all')}
@@ -1065,7 +1065,7 @@ export const DoctorClients = () => {
                 >
                   {t("ПО")}
                 </button>
-              </div>}
+              </div>} */}
             </div>
             <div className={` ${visible ? "bg-white" : "d-none"}`}>
               <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -1307,7 +1307,7 @@ export const DoctorClients = () => {
         text={t("ma'lumotlar to'g'ri kiritilganligini tasdiqlaysizmi?")}
         setModal={setModal}
         handler={isActive && isAddConnector ? addConnectorHandler : isActive && handleAdd}
-        basic={client.lastname + " " + client.firstname}
+        basic={client.fullname}
       />
     </>
   );

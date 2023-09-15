@@ -42,6 +42,7 @@ export const Navbar = () => {
     const auth = useContext(AuthContext);
 
     const user = auth.user;
+    console.log(auth);
     //====================================================================
     //====================================================================
 
@@ -149,7 +150,7 @@ export const Navbar = () => {
                                     {t("Online")}
                                 </Link>
                             </li>
-                            {/* <li className="nav-item dropdown">
+                            {auth?.clinica?.isVisibleCashier && <li className="nav-item dropdown">
                                 <Link
                                     role="button"
                                     data-toggle="dropdown"
@@ -247,7 +248,7 @@ export const Navbar = () => {
                                         </Link>
                                     </li>
                                 </ul>
-                            </li> */}
+                            </li>}
                         </ul>
                         <ul className="header-actions py-1 mr-2">
                             <li className="dropdown">

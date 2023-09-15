@@ -124,7 +124,7 @@ const BloodTestTables = ({
                                         {currentPage * countPage + key + 1}
                                     </td>
                                     <td className="border text-[16px] py-1 font-weight-bold">
-                                        {connector.client.firstname} {connector.client.lastname}
+                                        {connector.client.fullname}
                                     </td>
                                     <td className="border text-[16px] py-1 text-right">
                                         {connector.client.id}

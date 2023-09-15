@@ -81,7 +81,7 @@ export const SmallCheck = ({ baseUrl, clinica, connector, qr, user, smallCheckTy
                         </strong>
                     </div>
                     <div style={{ fontWeight: "bold", color: "black", fontSize: '20px', fontFamily: 'times' }}>
-                        {connector.client && connector.client.lastname} {connector.client && connector.client.firstname}
+                        {connector.client && connector.client.fullname}
                     </div>
                 </div>
                 <div className="flex justify-between items-center">

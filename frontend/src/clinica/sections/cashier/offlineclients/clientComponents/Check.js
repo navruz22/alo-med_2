@@ -123,8 +123,7 @@ export const Check = ({ baseUrl, clinica, connector, qr, user }) => {
                 className="d-inline-block"
                 style={{ fontSize: '20px', fontFamily: 'times' }}
               >
-                {t("F.I.O")}: {connector.client && connector.client.lastname}{' '}
-                {connector.client && connector.client.firstname}
+                {t("F.I.O")}: {connector.client && connector.client.fullname}
               </h6>
             </div>
           </div>

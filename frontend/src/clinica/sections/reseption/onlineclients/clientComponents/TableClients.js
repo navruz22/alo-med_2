@@ -109,9 +109,7 @@ export const TableClients = ({
                       {currentPage * countPage + key + 1}
                     </td>
                     <td className="border py-1 font-weight-bold">
-                      {connector.lastname +
-                        " " +
-                        connector.firstname}
+                      {connector?.fullname}
                     </td>
                     <td className="border py-1 text-right">
                       {connector?.specialty?.name}

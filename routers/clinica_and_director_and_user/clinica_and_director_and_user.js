@@ -36,6 +36,10 @@ router.post('/clinica/is_create_user', (req, res) => {
   require('./clinica.route').changeCreateUser(req, res);
 })
 
+router.post('/clinica/is_visible_cashier', (req, res) => {
+  require('./clinica.route').changeIsVisibleCashier(req, res);
+})
+
 //========================================================
 //Director
 router.post('/director/register', (req, res) => {

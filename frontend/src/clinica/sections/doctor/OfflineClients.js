@@ -136,7 +136,7 @@ export const OfflineClients = () => {
                 const data = await request(
                     `/api/offlineclient/client/getallreseption`,
                     "POST",
-                    { clinica: auth && auth.clinica._id, beginDay, endDay },
+                    { clinica: auth && auth.clinica?._id, beginDay, endDay },
                     {
                         Authorization: `Bearer ${auth.token}`,
                     }
@@ -162,7 +162,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/offlineclient/client/getallreseption`,
                 "POST",
-                { clinica: auth && auth.clinica._id, clientborn: new Date(e) },
+                { clinica: auth && auth.clinica?._id, clientborn: new Date(e) },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -189,7 +189,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/offlineclient/client/getallreseption`,
                 "POST",
-                { clinica: auth && auth.clinica._id, clientId },
+                { clinica: auth && auth.clinica?._id, clientId },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -216,7 +216,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/offlineclient/client/getallreseption`,
                 "POST",
-                { clinica: auth && auth.clinica._id, name },
+                { clinica: auth && auth.clinica?._id, name },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -243,7 +243,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/offlineclient/client/getallreseption`,
                 "POST",
-                { clinica: auth && auth.clinica._id, phone },
+                { clinica: auth && auth.clinica?._id, phone },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -340,7 +340,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/services/department/reseption`,
                 "POST",
-                { clinica: auth.clinica._id },
+                { clinica: auth.clinica?._id },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -356,7 +356,7 @@ export const OfflineClients = () => {
     }, [request, auth, notify]);
 
     const [connector, setConnector] = useState({
-        clinica: auth.clinica && auth.clinica._id,
+        clinica: auth.clinica && auth.clinica?._id,
         probirka: 0,
     });
 
@@ -369,10 +369,10 @@ export const OfflineClients = () => {
         let s = [];
         services.map((service) => {
             if (service.department.probirka) {
-                setConnector({ ...connector, probirka: 1, clinica: auth.clinica._id });
+                setConnector({ ...connector, probirka: 1, clinica: auth.clinica?._id });
             }
             return s.push({
-                clinica: auth.clinica._id,
+                clinica: auth.clinica?._id,
                 reseption: auth.user._id,
                 serviceid: service.service._id,
                 service: service.service,
@@ -400,7 +400,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/offlineclient/client/counter_doctors/get`,
                 "POST",
-                { clinica: auth.clinica._id, },
+                { clinica: auth.clinica?._id, },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -437,7 +437,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/services/servicetype/getall`,
                 "POST",
-                { clinica: auth.clinica._id, },
+                { clinica: auth.clinica?._id, },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -462,7 +462,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/adver/adver/getall`,
                 "POST",
-                { clinica: auth.clinica._id },
+                { clinica: auth.clinica?._id },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -478,7 +478,7 @@ export const OfflineClients = () => {
     }, [request, auth, notify]);
 
     const [adver, setAdver] = useState({
-        clinica: auth.clinica && auth.clinica._id,
+        clinica: auth.clinica && auth.clinica?._id,
         reseption: auth.user && auth.user._id,
     });
 
@@ -507,7 +507,7 @@ export const OfflineClients = () => {
             const data = await request(
                 `/api/services/product/getallreseption`,
                 "POST",
-                { clinica: auth.clinica._id },
+                { clinica: auth.clinica?._id },
                 {
                     Authorization: `Bearer ${auth.token}`,
                 }
@@ -538,7 +538,7 @@ export const OfflineClients = () => {
         let s = [];
         newproducts.map((product) => {
             return s.push({
-                clinica: auth.clinica._id,
+                clinica: auth.clinica?._id,
                 reseption: auth.user._id,
                 productid: product.product._id,
                 product: product.product,
@@ -580,7 +580,7 @@ export const OfflineClients = () => {
     const [clientDate, setClientDate] = useState(new Date().toISOString().slice(0, 10))
 
     const [client, setClient] = useState({
-        clinica: auth.clinica && auth.clinica._id,
+        clinica: auth.clinica && auth.clinica?._id,
         reseption: auth.user && auth.user._id,
         born: new Date()
     });
@@ -604,15 +604,15 @@ export const OfflineClients = () => {
 
     const clearDatas = useCallback(() => {
         setClient({
-            clinica: auth.clinica && auth.clinica._id,
+            clinica: auth.clinica && auth.clinica?._id,
             reseption: auth.user && auth.user._id,
         });
         setConnector({
-            clinica: auth.clinica && auth.clinica._id,
+            clinica: auth.clinica && auth.clinica?._id,
             probirka: 0,
         });
         setAdver({
-            clinica: auth.clinica && auth.clinica._id,
+            clinica: auth.clinica && auth.clinica?._id,
             reseption: auth.user && auth.user._id,
         });
         setCounterDoctor(null);
@@ -655,12 +655,13 @@ export const OfflineClients = () => {
                 `/api/offlineclient/client/register`,
                 "POST",
                 {
-                    client: { ...client, clinica: auth.clinica._id },
-                    connector: { ...connector, clinica: auth.clinica._id },
+                    client: { ...client, clinica: auth.clinica?._id },
+                    connector: { ...connector, clinica: auth.clinica?._id },
                     services: [...services],
                     products: [...newproducts],
                     counterdoctor: counterdoctor,
-                    adver: { ...adver, clinica: auth.clinica._id },
+                    adver: { ...adver, clinica: auth.clinica?._id },
+                    addedByDoctor: true
                 },
                 {
                     Authorization: `Bearer ${auth.token}`,
@@ -713,10 +714,10 @@ export const OfflineClients = () => {
                 `/api/offlineclient/client/update`,
                 "PUT",
                 {
-                    client: { ...client, clinica: auth.clinica._id },
-                    connector: { ...connector, clinica: auth.clinica._id },
+                    client: { ...client, clinica: auth.clinica?._id },
+                    connector: { ...connector, clinica: auth.clinica?._id },
                     counterdoctor: counterdoctor,
-                    adver: { ...adver, clinica: auth.clinica._id },
+                    adver: { ...adver, clinica: auth.clinica?._id },
                 },
                 {
                     Authorization: `Bearer ${auth.token}`,
@@ -759,12 +760,12 @@ export const OfflineClients = () => {
                 `/api/offlineclient/client/add`,
                 "POST",
                 {
-                    client: { ...client, clinica: auth.clinica._id },
-                    connector: { ...connector, clinica: auth.clinica._id },
+                    client: { ...client, clinica: auth.clinica?._id },
+                    connector: { ...connector, clinica: auth.clinica?._id },
                     services: [...services],
                     products: [...newproducts],
                     counterdoctor: counterdoctor,
-                    adver: { ...adver, clinica: auth.clinica._id },
+                    adver: { ...adver, clinica: auth.clinica?._id },
                 },
                 {
                     Authorization: `Bearer ${auth.token}`,
@@ -815,12 +816,12 @@ export const OfflineClients = () => {
                 `/api/offlineclient/client/connector/add`,
                 "POST",
                 {
-                    client: { ...client, clinica: auth.clinica._id },
-                    connector: { ...connector, clinica: auth.clinica._id },
+                    client: { ...client, clinica: auth.clinica?._id },
+                    connector: { ...connector, clinica: auth.clinica?._id },
                     services: [...services],
                     products: [...newproducts],
                     counterdoctor: counterdoctor,
-                    adver: { ...adver, clinica: auth.clinica._id },
+                    adver: { ...adver, clinica: auth.clinica?._id },
                 },
                 {
                     Authorization: `Bearer ${auth.token}`,
@@ -863,7 +864,7 @@ export const OfflineClients = () => {
                 const data = await request(
                     `/api/offlineclient/client/after_client/get`,
                     "POST",
-                    { clinica: auth && auth.clinica._id },
+                    { clinica: auth && auth.clinica?._id },
                     {
                         Authorization: `Bearer ${auth.token}`,
                     }
@@ -1005,7 +1006,7 @@ export const OfflineClients = () => {
         if (state?.onlineclient) {
             let onlineclient = state?.onlineclient
             setClient({
-                clinica: auth.clinica && auth.clinica._id,
+                clinica: auth.clinica && auth.clinica?._id,
                 reseption: auth.user && auth.user._id,
                 firstname: onlineclient.firstname,
                 lastname: onlineclient.lastname,

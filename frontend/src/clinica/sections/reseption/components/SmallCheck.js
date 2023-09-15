@@ -44,7 +44,7 @@ export const SmallCheck = ({ baseUrl, clinica, client, connector, qr, turn, turn
                     </div>
                 </div>
                 <div className="mt-4" style={{ fontWeight: "bold", color: "black", fontSize: '32px', fontFamily: 'times' }}>
-                    {client?.firstname + ' ' + client?.lastname}
+                    {client?.fullname}
                 </div>
                 <div style={{ fontWeight: "bold", color: "black", fontSize: '100px'}}>
                      {turntitle === 'A' && connector.isBooking ?  t('Belgilangan') : `${turntitle} ${turn}`}

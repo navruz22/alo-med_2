@@ -131,6 +131,28 @@ const RegisterClinica = () => {
         }
     }
 
+    const changeIsVisibleCashier = async (id) => {
+        try {
+            const data = await request(
+                `/api/clinica/is_visible_cashier`,
+                "POST",
+                { id }
+            );
+            notify({
+                title: data?.message,
+                description: "",
+                status: "success",
+            });
+            getClinicas()
+        } catch (error) {
+            notify({
+                title: error,
+                description: "",
+                status: "error",
+            });
+        }
+    }
+
     //=========================================================
     //=========================================================
 
@@ -217,6 +239,7 @@ const RegisterClinica = () => {
                             setDirectorData={setDirectorData}
                             setRegisterType={setRegisterType}
                             changeIsCreateUser={changeIsCreateUser}
+                            changeIsVisibleCashier={changeIsVisibleCashier}
                         />
                     </div>
                 </div>

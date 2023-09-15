@@ -5,8 +5,8 @@ const client = new Schema(
   {
     clinica: { type: Schema.Types.ObjectId, ref: 'Clinica' },
     isArchive: { type: Boolean, default: false },
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
+    // firstname: { type: String, required: true },
+    // lastname: { type: String, required: true },
     fathername: { type: String },
     fullname: { type: String },
     born: { type: Date },
@@ -26,8 +26,9 @@ const client = new Schema(
 function validateClient(client) {
   const schema = Joi.object({
     clinica: Joi.string(),
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
+    firstname: Joi.string().optional(),
+    lastname: Joi.string().optional(),
+    fullname: Joi.string().required(),
     fathername: Joi.string(),
     gender: Joi.string().optional(),
     born: Joi.date(),

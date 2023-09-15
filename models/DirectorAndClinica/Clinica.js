@@ -28,6 +28,7 @@ const clinica = new Schema(
     isClose: {type: Boolean, default: false},
     close_date: {type: Date},
     isCreateUser: {type: Boolean, default: false},
+    isVisibleCashier: {type: Boolean, default: false},
     isArchive: { type: Boolean, default: false },
   },
   {

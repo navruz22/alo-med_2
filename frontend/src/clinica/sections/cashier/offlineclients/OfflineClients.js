@@ -956,7 +956,7 @@ export const OfflineClients = () => {
                 </div>}
                 setModal={setModal}
                 handler={() => isActive && createHandler()}
-                basic={client.lastname + " " + client.firstname}
+                basic={client.fullname}
             />
         </div>
     )

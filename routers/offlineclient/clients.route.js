@@ -43,6 +43,7 @@ module.exports.register = async (req, res) => {
             products,
             counterdoctor,
             adver,
+            addedByDoctor
         } = req.body
         //=========================================================
         // CheckData
@@ -71,9 +72,9 @@ module.exports.register = async (req, res) => {
 
         const id = connectors.length > 0 ? connectors[0].id + 1 : 1000001
 
-        const fullname = client.lastname + ' ' + client.firstname
+        // const fullname = client.lastname + ' ' + client.firstname
 
-        const newclient = new OfflineClient({ ...client, id, fullname })
+        const newclient = new OfflineClient({ ...client, id })
         await newclient.save()
 
         //=========================================================
@@ -99,6 +100,11 @@ module.exports.register = async (req, res) => {
             client: newclient._id,
             probirka,
         })
+
+        if (addedByDoctor) {
+            newconnector.addedByDoctor = true;
+        }
+
         await newconnector.save()
 
         newclient.connectors.push(newconnector._id)
@@ -274,7 +280,7 @@ module.exports.add = async (req, res) => {
 
         const updateClient = await OfflineClient.findByIdAndUpdate(
             client._id,
-            { ...client, fullname: client.firstname + ' ' + client.lastname },
+            { ...client },
         )
 
         const updateOfflineConnector = await OfflineConnector.findById(
@@ -749,7 +755,7 @@ module.exports.getAllReseption = async (req, res) => {
                 clinica
             })
                 .select('isBooking probirka client accept services products createdAt totalprice step stepAccess stepDate')
-                .populate('client', 'fullname firstname lastname fathername phone national id gender born address')
+                .populate('client', 'fullname fathername phone national id gender born address')
                 .populate({
                     path: "services",
                     select: "service reseption pieces createdAt serviceid accept refuse column templates tables turn connector client files department",
@@ -835,6 +841,7 @@ module.exports.getAllReseption = async (req, res) => {
                     return connectors.filter(connector => String(connector.client && connector.client.id).includes(clientId));
                 })
         } else if (name) {
+            console.log('wow');
             connectors = await OfflineConnector.find({
                 clinica
             })

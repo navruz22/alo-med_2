@@ -350,7 +350,7 @@ export const Conclusion = () => {
                       {service.connector.probirka}
                     </td>
                     <td className="border py-1 font-weight-bold text-[16px]">
-                      {service.client.firstname} {service.client.lastname}
+                      {service.client.fullname}
                     </td>
                     <td className="border py-1 text-right text-[16px]">
                       {new Date(service.client.born).toLocaleDateString()}

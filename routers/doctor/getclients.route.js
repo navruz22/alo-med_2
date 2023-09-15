@@ -45,7 +45,7 @@ module.exports.getAll = async (req, res) => {
         .sort({ createdAt: -1 })
         .select('-__v -updatedAt -isArchive')
         .populate('clinica', 'name phone1 image')
-        .populate("client", "lastname firstname born id phone address")
+        .populate("client", "fullname born id phone address")
         .populate({
           path: "services",
           select: "service serviceid accept reseption refuse column payment tables turn connector client files department",
@@ -95,7 +95,7 @@ module.exports.getAll = async (req, res) => {
         .sort({ createdAt: -1 })
         .select('-__v -updatedAt -isArchive')
         .populate('clinica', 'name phone1 image')
-        .populate("client", "lastname firstname born id phone address fullname")
+        .populate("client", "fullname born id phone address fullname")
         .populate({
           path: "services",
           select: "service serviceid accept reseption refuse column payment tables turn connector client files department",
@@ -150,7 +150,7 @@ module.exports.getAll = async (req, res) => {
         .sort({ createdAt: 1 })
         .select('-__v -updatedAt -isArchive')
         .populate('clinica', 'name phone1 image')
-        .populate("client", "lastname firstname born id phone address")
+        .populate("client", "fullname born id phone address")
         .populate({
           path: "services",
           select: "service createdAt serviceid reseption accept refuse column payment tables turn connector client files department",
@@ -190,7 +190,7 @@ module.exports.getAll = async (req, res) => {
         .populate('payments')
         .lean()
         .then(connectors => connectors.filter(connector => {
-          return connector.services.some(service => String(service.department._id) === String(department) && !service.refuse && service.payment)
+          return connector.services.some(service => String(service.department._id) === String(department) && !service.refuse && (connector.addedByDoctor ? true : service.payment))
         }))
     }
 
@@ -203,17 +203,18 @@ module.exports.getAll = async (req, res) => {
             accept: connector.accept,
             createdAt: connector.createdAt,
             probirka: connector.probirka,
+            addedByDoctor: connector.addedByDoctor,
             _id: connector._id,  
             step: connector.step && connector.step,
             stepDate: connector.stepDate && connector.stepDate,
             isBooking: connector.isBooking && connector.isBooking,
           },
-          services: [...connector.services].filter(service => service.refuse === false && service.payment),
+          services: [...connector.services].filter(service => service.refuse === false && (connector.addedByDoctor ? true : service.payment)),
           payments: connector.payments
         })
       }
     }
-
+    
     res.status(200).send(clients);
   } catch (error) {
     console.log(error);
@@ -833,7 +834,7 @@ module.exports.getClientHistory = async (req, res) => {
     const connector = await OfflineConnector.findById(id)
       .select('-__v -updatedAt -isArchive')
       .populate('clinica', 'name phone1 image')
-      .populate("client", "lastname firstname born id phone address")
+      .populate("client", "fullname born id phone address")
       .populate({
         path: "services",
         select: "service serviceid accept refuse column tables turn connector client files department",
@@ -876,7 +877,7 @@ module.exports.getClientHistory = async (req, res) => {
       const statsionarconnector = await StatsionarConnector.findById(id)
         .select('-__v -updatedAt -isArchive')
         .populate('clinica', 'name phone1 image')
-        .populate("client", "lastname firstname born id phone address")
+        .populate("client", "fullname born id phone address")
         .populate({
           path: "services",
           select: "service serviceid accept refuse createdAt column tables turn connector client files department",

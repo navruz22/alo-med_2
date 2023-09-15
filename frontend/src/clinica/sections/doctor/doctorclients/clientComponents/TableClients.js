@@ -281,7 +281,7 @@ export const TableClients = ({
                         {currentPage * countPage + key + 1}
                       </td>
                       <td className="border text-[16px] py-1 font-weight-bold">
-                        {listType === 'operation' ? `${connector?.firstname} ${connector?.lastname}` : `${connector?.client?.firstname} ${connector?.client?.lastname}`}
+                        {connector?.client?.fullname}
                       </td>
                       <td className="border text-[16px] py-1 text-right">
                         {listType === 'operation' ? `${new Date(connector?.createdAt).toLocaleTimeString('ru-RU')}` : listType === 'nextsteps' ? `${new Date(connector?.connector?.stepDate).toLocaleDateString('ru-RU')} ${new Date(connector?.connector?.stepDate).toLocaleTimeString('ru-RU')}` : `${new Date(connector?.connector?.createdAt).toLocaleDateString('ru-RU')} ${new Date([...connector?.services].filter(service => service.department._id === user.specialty._id).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0].createdAt).toLocaleTimeString('ru-RU')}`}
@@ -368,7 +368,7 @@ export const TableClients = ({
                             <FontAwesomeIcon icon={faCheck} />
                           </button>
                         )}
-                        {loading ? (
+                        {/* {loading ? (
                           <button className="ml-2 btn btn-warning" disabled>
                             <span className="spinner-border spinner-border-sm"></span>
                             Loading...
@@ -382,7 +382,7 @@ export const TableClients = ({
                           >
                             <FontAwesomeIcon icon={faBell} />
                           </button>
-                        )}
+                        )} */}
                         </div>
                         
                       </td>}

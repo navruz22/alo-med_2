@@ -46,7 +46,7 @@ module.exports.update = async (req, res) => {
         } = req.body
         //=========================================================
         
-
+        
         await OnlineClient.findByIdAndUpdate(client._id, {...client})
 
         const response = await OnlineClient.findById(client._id)

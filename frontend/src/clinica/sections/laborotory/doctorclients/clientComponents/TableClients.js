@@ -211,7 +211,7 @@ export const TableClients = ({
                     {connector.services.length}/{connector.services.filter(el => el.accept).length}
                   </td>
                   <td className="border py-1 font-weight-bold text-[16px]">
-                    {connector.client.firstname} {connector.client.lastname}
+                    {connector.client.fullname}
                   </td>
                   <td className="border py-1 text-right text-[16px]">
                     {new Date(connector.client.born).toLocaleDateString()}

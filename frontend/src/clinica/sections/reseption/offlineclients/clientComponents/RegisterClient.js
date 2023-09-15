@@ -96,45 +96,17 @@ export const RegisterClient = ({
                         </div>
                         <div className="card-body">
                             <div className="row gutters">
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div className="form-group">
-                                        <label htmlFor="fullName">{t("Familiyasi")}</label>
-                                        <input
-                                            value={client.lastname || ''}
-                                            onChange={changeClientData}
-                                            type="text"
-                                            className="form-control form-control-sm"
-                                            id="lastname"
-                                            name="lastname"
-                                            placeholder={t("Familiyasi")}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
                                     <div className="form-group">
                                         <label htmlFor="inputEmail">{t("Ismi")}</label>
                                         <input
-                                            value={client.firstname || ''}
+                                            value={client.fullname || ''}
                                             onChange={changeClientData}
                                             type="text"
                                             className="form-control form-control-sm"
-                                            id="firstname"
-                                            name="firstname"
+                                            id="fullname"
+                                            name="fullname"
                                             placeholder={t("Ismi")}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div className="form-group">
-                                        <label htmlFor="education">{t("Otasining ismi")}</label>
-                                        <input
-                                            value={client.fathername || ''}
-                                            onChange={changeClientData}
-                                            type="text"
-                                            className="form-control form-control-sm"
-                                            id="fathername"
-                                            name="fathername"
-                                            placeholder={t("Otasining ismi")}
                                         />
                                     </div>
                                 </div>

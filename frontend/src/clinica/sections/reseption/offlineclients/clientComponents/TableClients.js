@@ -198,32 +198,26 @@ export const TableClients = ({
                 </th>
                 <th className='border py-1 bg-alotrade text-[16px]'>{t("Tel")}</th>
                 <th className="border py-1 bg-alotrade text-[16px]">
-                  {t("ID")}
+                  {t("Tug'ilgan sa'nasi")}
                 </th>
                 {/* <th className="border py-1 bg-alotrade text-[16px]">
                   {t("Probirka")}
                 </th> */}
-                {listType !== 'operation' && <th className="border py-1 bg-alotrade text-[16px]">
-                  {t("Bo'lim")}
-                </th>}
+                <th className="border py-1 bg-alotrade text-[16px]">
+                  {t("Xizmatlar")}
+                </th>
                 <th className="border py-1 bg-alotrade text-[16px]">
                   {t("Navbat")}
                 </th>
                 <th className="border py-1 bg-alotrade text-[16px]">
                   {t("Kelgan vaqti")}
                 </th>
-                {listType === 'all' && <th className="border py-1 bg-alotrade text-[16px]">
-
-                </th>}
-                {listType === 'all' && <th className="border py-1 bg-alotrade text-[16px]">
-
-                </th>}
-                {listType === 'all' && <th className="border py-1 bg-alotrade text-[16px]">
+                <th className="border py-1 bg-alotrade text-[16px]">
                   {t("Qo'shish")}
-                </th>}
-                {listType !== 'operation' && <th className="border py-1 bg-alotrade text-[16px]">
+                </th>
+                <th className="border py-1 bg-alotrade text-[16px]">
 
-                </th>}
+                </th>
                 <th className="border py-1 bg-alotrade text-[16px]">
                   {t("Chop etish")}
                 </th>
@@ -240,51 +234,34 @@ export const TableClients = ({
                       {currentPage * countPage + key + 1}
                     </td>
                     <td className="border py-1 font-weight-bold text-[16px]">
-                      {listType === 'operation' ? connector?.lastname +
-                        ' ' +
-                        connector?.firstname : connector?.client?.lastname +
-                        ' ' +
-                      connector?.client?.firstname}
+                      {connector?.client?.fullname}
                     </td>
                     <td className="border py-1 text-right text-[16px]">
-                      +998{listType === 'operation' ? connector?.phone : connector?.client?.phone}
+                      +998{connector?.client?.phone}
                     </td>
                     <td className="border py-1 text-right text-[16px]">
-                      {listType === 'operation' ? connector?.id : connector?.client?.id}
+                    {new Date(connector?.client?.born).toLocaleDateString()}
                     </td>
                     {/* <td className="border py-1 text-right text-[16px]">
                       {connector?.probirka}
                     </td> */}
-                    {listType !== 'operation' && <td className="border py-1 text-right text-[16px]">
-                      {listType === 'operation' ? connector?.department?.name : [...connector?.services].filter(service => service.department.probirka === false)[0]?.department?.name || [...connector?.services].filter(service => service.department.probirka)[0]?.department?.name}
-                    </td>}
+                    <td className="border py-1 text-right text-[16px]">
+                      <button onClick={() => {
+                        allModalHandle(connector.services, connector, connector.client)
+                      }}>
+                        <span className={`${connector.services.filter(service => !service.refuse).length === connector.services.filter(service => service.accept).length ? 'text-green-400' : "text-red-400"}`}>{connector.services.filter(service => !service.refuse).length}</span> / <span className='text-green-400'>{connector.services.filter(service => service.accept).length}</span>
+                      </button>
+                    </td>
+                    {/* <td className="border py-1 text-right text-[16px]">
+                      {[...connector?.services].filter(service => service.department.probirka === false)[0]?.department?.name || [...connector?.services].filter(service => service.department.probirka)[0]?.department?.name}
+                    </td> */}
                     <td className={`border py-1 text-right text-[16px] font-bold ${listType === 'all' && connector.isBooking && "bg-green-400"}`}>
                       {listType === 'all' && connector?.isBooking ? t('Belgilangan') : `${listType === 'operation' ? 'ПО' : connector.step ? 'KO' : connector.services.filter(i => !i.department.probirka)[0]?.department?.turntitle || 'L'} ${listType === 'operation' ? connector?.turn : (listType === 'nextsteps' && connector?.step ? getTurnStepClient(connector) : [...connector?.services].filter(service => service.department.probirka === false)[0]?.turn || [...connector?.services].filter(service => service.department.probirka)[0]?.turn)}`}
                     </td>
                     <td className="border py-1 text-right text-[16px]">
-                      {
-                        listType === 'nextsteps' ?
-                          `${new Date(connector?.stepDate).toLocaleDateString()} ${new Date(connector?.stepDate).toLocaleTimeString()}` :
-                          `${new Date(connector?.createdAt).toLocaleDateString()} ${new Date(connector?.createdAt).toLocaleTimeString()}`
-                      }
+                      {`${new Date(connector?.createdAt).toLocaleDateString()} ${new Date(connector?.createdAt).toLocaleTimeString()}`}
                     </td>
-                    {listType === 'all' && <td className="border py-1 text-center text-[16px]">
-                      <button
-                        className={connector.step ? "btn bg-green-400 py-0 text-white" : "btn btn-success py-0 text-white"}
-                        onClick={() => changeStep(connector)}
-                      >
-                        КО
-                      </button>
-                    </td>}
-                    {listType === 'all' && <td className="border py-1 text-center text-[16px]">
-                      <button
-                        className="bg-orange-500 border-orange-500 hover:bg-green-400 btn btn-success py-0"
-                        onClick={() => changeAfterClient(connector)}
-                      >
-                        ПО
-                      </button>
-                    </td>}
-                    {listType === 'all' && <td className="border py-1 text-center text-[16px]">
+                    <td className="border py-1 text-center text-[16px]">
                       <button
                         className={`${new Date(connector?.createdAt).toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10) ? "bg-green-500 border-green-500 hover:bg-green-400" : "bg-gray-400"} btn btn-success py-0`}
                         onClick={() => {
@@ -304,17 +281,15 @@ export const TableClients = ({
                       >
                         <FontAwesomeIcon icon={faUserPen} />
                       </button>
-                    </td>}
-                    {listType !== 'operation' &&
-                      <td className="border py-1 text-right text-[16px]">
-                        <div className='flex flex-row justify-center items-center  pt-[1.25rem] pb-[1.25rem] pr-[.625rem] pl-[.625rem] gap-[1.25rem]'>
-                          <div className='flex items-center gap-[.625rem]'>
-                            <input type='checkbox' checked={connector?.stepAccess}
-                              onChange={() => handleAccessNext(connector?._id, connector.stepAccess ? false : true)} />
-                          </div>
+                    </td>
+                    <td className="border py-1 text-right text-[16px]">
+                      <div className='flex flex-row justify-center items-center  pt-[1.25rem] pb-[1.25rem] pr-[.625rem] pl-[.625rem] gap-[1.25rem]'>
+                        <div className='flex items-center gap-[.625rem]'>
+                          <input type='checkbox' checked={connector?.stepAccess}
+                            onChange={() => handleAccessNext(connector?._id, connector.stepAccess ? false : true)} />
                         </div>
-                      </td>
-                    }
+                      </div>
+                    </td>
                     <td className="border py-1 text-center text-[16px]">
                       {loading ? (
                         <button className="btn btn-success" disabled>

@@ -54,16 +54,8 @@ export const RegisterClient = ({
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="py-1 border">{t("Familiyasi")}</td>
-                                        <td className="py-1 border">{client.lastname}</td>
-                                    </tr>
-                                    <tr>
                                         <td className="py-1 border">{t("Ismi")}</td>
-                                        <td className="py-1 border">{client.firstname}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="py-1 border">{t("Otasining ismi")}</td>
-                                        <td className="py-1 border">{client.fathername}</td>
+                                        <td className="py-1 border">{client.fullname}</td>
                                     </tr>
                                     <tr>
                                         <td className="py-1 border">{t("Tug'ilgan sanasi")}</td>

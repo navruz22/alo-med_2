@@ -198,9 +198,7 @@ export const MainReportTable = ({
                                             {currentPage * countPage + key + 1}
                                         </td>
                                         <td className="border py-1 text-[16px] font-weight-bold">
-                                            {connector?.client?.lastname +
-                                                " " +
-                                                connector?.client?.firstname}
+                                            {connector?.client?.fullname}
                                         </td>
                                         <td className="border py-1 text-[16px] text-right">
                                             +998{connector?.client?.phone}
