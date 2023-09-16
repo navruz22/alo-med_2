@@ -54,13 +54,13 @@ module.exports.registerAll = async (req, res) => {
         name: servicetype,
         department: departmen._id,
         clinica: clinic._id,
-      });
+      });    
 
-      if (!Servicetype && servicetype) {
-        return res.status(400).json({
-          message: `Diqqat! ${department} bo'limida ${servicetype} xizmat turi mavjud emas.`,
-        });
-      }
+      // if (!Servicetype && servicetype) {
+      //   return res.status(400).json({
+      //     message: `Diqqat! ${department} bo'limida ${servicetype} xizmat turi mavjud emas.`,
+      //   });
+      // }
 
       const service = await Service.findOne({
         clinica: clinic._id,
@@ -88,6 +88,15 @@ module.exports.registerAll = async (req, res) => {
 
       if (Servicetype) {
         newService.servicetype = Servicetype._id;
+      } else {
+        const stype = new ServiceType({
+          name: servicetype,
+          department: departmen._id,
+          clinica: clinic._id,
+        });    
+        await stype.save()
+
+        newService.servicetype = stype._id;
       }
 
       all.push(newService);

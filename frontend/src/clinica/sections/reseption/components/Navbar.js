@@ -194,20 +194,6 @@ export const Navbar = () => {
                                     <li>
                                         <Link
                                             className="sub-nav-link"
-                                            to="/alo24/cashier_statsionar"
-                                            role="button"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                            onClick={() => {
-                                                setActivePage('/alo24/cashier_statsionar')
-                                            }}
-                                        >
-                                            {t("Statsionar")}
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            className="sub-nav-link"
                                             to="/alo24/cashier_discount"
                                             role="button"
                                             aria-haspopup="true"
