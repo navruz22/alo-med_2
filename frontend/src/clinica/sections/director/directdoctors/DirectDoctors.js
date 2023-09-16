@@ -155,13 +155,13 @@ const DirectDoctors = () => {
 
     return (
         <div className="bg-slate-100 content-wrapper px-lg-5 px-3">
-            <div className='flex justify-between items-center mb-4'>
+            <div className='flex gap-4 items-center mb-4'>
                 <Link to='/alo24/doctor_procient' className="block px-4 py-2 rounded-xl text-[#fff] text-[21px] hover:text-[#fff] font-bold bg-alotrade">
                     {t("Kunduzgi shifokor ulushi")}
                 </Link>
-                <Link to='/alo24/statsionardoctors' className="block px-4 py-2 rounded-xl text-[#fff] text-[21px] hover:text-[#fff] font-bold bg-alotrade">
+                {/* <Link to='/alo24/statsionardoctors' className="block px-4 py-2 rounded-xl text-[#fff] text-[21px] hover:text-[#fff] font-bold bg-alotrade">
                     {t("Statsionar ulushi")}
-                </Link>
+                </Link> */}
                 <Link to='/alo24/directdoctors' className="block px-4 py-2 rounded-xl text-[#fff] text-[21px] hover:text-[#fff] font-bold bg-alotrade">
                     {t("Yullanmadan ulushi")}
                 </Link>

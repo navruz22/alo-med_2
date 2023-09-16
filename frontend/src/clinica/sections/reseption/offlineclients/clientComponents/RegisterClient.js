@@ -194,7 +194,7 @@ export const RegisterClient = ({
                                         </div>
                                     </div>
                                 </div> */}
-                                <div className="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-12">
+                                {/* <div className="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-12">
                                     <div className="form-group">
                                         <div>
                                             <div className="custom-control custom-checkbox text-center">
@@ -209,7 +209,7 @@ export const RegisterClient = ({
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-12">
                                     <div className="form-group">
                                         <label htmlFor="biO">{t("Manzili")}</label>

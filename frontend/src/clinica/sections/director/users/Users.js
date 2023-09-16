@@ -531,7 +531,6 @@ export const Users = () => {
                       <th className="border-right bg-alotrade text-[16px]">
                         {t("Tel")}
                       </th>
-                      <th className="border-right bg-alotrade text-[16px]"></th>
                       <th className="border-right bg-alotrade text-[16px] text-center">{t("Tahrirlash")}</th>
                       <th className="text-center bg-alotrade text-[16px]">{t("O'chirish")}</th>
                     </tr>
@@ -563,14 +562,6 @@ export const Users = () => {
                           </td>
                           <td className="border-right text-[16px]">
                             {'+998' + user.phone}
-                          </td>
-                          <td className="border-right text-[16px]">
-                            {user.type === 'Doctor' && <div className='flex flex-row justify-center items-center  pt-[1.25rem] pb-[1.25rem] pr-[.625rem] pl-[.625rem] gap-[1.25rem]'>
-                              <div className='flex items-center gap-[.625rem]'>
-                                <input type='checkbox' checked={user?.isOne}
-                                  onChange={() => changeIsOne(user?.isOne ? false : true, user?._id)} />
-                              </div>
-                            </div>}
                           </td>
                           <td className="border-right text-[16px] text-center">
                             {loading ? (

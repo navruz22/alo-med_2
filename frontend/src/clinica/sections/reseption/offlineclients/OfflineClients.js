@@ -16,6 +16,7 @@ import AllModal from "./clientComponents/AllModal";
 import { useLocation } from "react-router-dom";
 import { SmallCheck } from "../components/SmallCheck";
 import { SmallCheck2 } from "../components/SmallCheck2";
+import DepartsModal from "./clientComponents/DepartsModal";
 
 export const OfflineClients = () => {
     const [beginDay, setBeginDay] = useState(
@@ -32,6 +33,7 @@ export const OfflineClients = () => {
     const [modal2, setModal2] = useState(false);
     const [modal3, setModal3] = useState(false);
     const [modal4, setModal4] = useState(false);
+    const [modal5, setModal5] = useState(false);
     //====================================================================
     //====================================================================
 
@@ -842,7 +844,9 @@ export const OfflineClients = () => {
 
     const showSmallCehckReturn = (connector) => {
         setCheckType('all')
-        setPrintBody({ ...connector, turntitle: [...connector?.services].filter(service => service.department.probirka === false)[0]?.department?.turntitle || 'L', turn: [...connector?.services].filter(service => service.department.probirka === false)[0]?.turn || [...connector?.services].filter(service => service.department.probirka)[0]?.turn })
+        setPrintBody({ ...connector, 
+            turntitle: [...connector?.services].filter(service => service.department.probirka === false)[0]?.department?.turntitle || 'L', 
+            turn: [...connector?.services].filter(service => service.department.probirka === false)[0]?.turn || [...connector?.services].filter(service => service.department.probirka)[0]?.turn })
         setTimeout(() => {
             handlePrint()
         }, 1000)
@@ -1174,6 +1178,39 @@ export const OfflineClients = () => {
     
     //====================================================================
     //====================================================================
+
+    const [departs, setDeparts] = useState([])
+
+    const setDepartsList = (connector) => {
+        let arr = [];
+        let deps = connector.services.reduce((prev, el) => {
+            if (!prev.includes(el.department._id)) {
+                prev.push(el.department._id)
+            }
+            return prev;
+        }, [])
+        for (const dep of deps) {
+            const services = connector.services.reduce((prev, el) => {
+                if (el.department._id === dep) {
+                    prev.push(el)
+                }
+                return prev
+            }, [])
+            arr.push({
+                ...connector,
+                departmentname: services[0].department?.name,
+                room: services[0].department?.room,
+                services: services,
+                turntitle: services[0].department?.turntitle || 'L', 
+                turn: services[0].turn
+            })
+        }
+        setDeparts(arr)
+        setModal5(true)
+    }
+
+    //====================================================================
+    //====================================================================
     return (
         <div className="min-h-full">
             <div className="bg-slate-100 content-wrapper px-lg-5 px-3">
@@ -1302,6 +1339,7 @@ export const OfflineClients = () => {
                             handleAccessNext={handleAccessNext}
                             departments={departments}
                             selectDepartment={selectDepartment}
+                            setDepartsList={setDepartsList}
                         />
                     </div>
                 </div>
@@ -1383,6 +1421,12 @@ export const OfflineClients = () => {
                 clinica={auth?.clinica}
                 doctor={auth?.user}
                 baseUrl={baseUrl}
+            />
+            <DepartsModal
+                departs={departs}
+                setModal={setModal5}
+                modal={modal5}
+                showSmallCehckReturn={showSmallCehckReturn}
             />
         </div>
     );

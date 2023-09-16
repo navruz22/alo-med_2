@@ -61,7 +61,8 @@ export const TableClients = ({
   showSmallCehckReturn,
   handleAccessNext,
   departments,
-  selectDepartment
+  selectDepartment,
+  setDepartsList
 }) => {
 
   const { t } = useTranslation()
@@ -255,7 +256,9 @@ export const TableClients = ({
                     {/* <td className="border py-1 text-right text-[16px]">
                       {[...connector?.services].filter(service => service.department.probirka === false)[0]?.department?.name || [...connector?.services].filter(service => service.department.probirka)[0]?.department?.name}
                     </td> */}
-                    <td className={`border py-1 text-right text-[16px] font-bold ${listType === 'all' && connector.isBooking && "bg-green-400"}`}>
+                    <td className={`border py-1 text-right text-[16px] font-bold ${listType === 'all' && connector.isBooking && "bg-green-400"}`}
+                      onClick={() => setDepartsList(connector)}
+                    >
                       {listType === 'all' && connector?.isBooking ? t('Belgilangan') : `${listType === 'operation' ? 'ПО' : connector.step ? 'KO' : connector.services.filter(i => !i.department.probirka)[0]?.department?.turntitle || 'L'} ${listType === 'operation' ? connector?.turn : (listType === 'nextsteps' && connector?.step ? getTurnStepClient(connector) : [...connector?.services].filter(service => service.department.probirka === false)[0]?.turn || [...connector?.services].filter(service => service.department.probirka)[0]?.turn)}`}
                     </td>
                     <td className="border py-1 text-right text-[16px]">

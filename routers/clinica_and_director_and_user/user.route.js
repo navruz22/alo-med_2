@@ -292,9 +292,7 @@ module.exports.removeUser = async (req, res) => {
       });
     }
 
-    const updateUser = await User.findByIdAndUpdate(userId, {
-      isArchive: true,
-    });
+    await User.findByIdAndDelete(userId)
 
     res
       .status(201)
