@@ -4,6 +4,7 @@ import {
   faAngleUp,
   faAngleDown,
   faPenAlt,
+  faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
 import { Sort } from "./Sort";
 import { Pagination } from "../../components/Pagination";
@@ -121,7 +122,7 @@ export const TableClients = ({
                   {t("F.I.Sh")}
                 </th>
                 <th className="border bg-alotrade text-[16px] py-1">
-                  {t("ID")}
+                  {t("Sa'na")}
                 </th>
                 <th className="border bg-alotrade text-[16px] py-1">
                   {t("Telefon raqami")}
@@ -157,7 +158,7 @@ export const TableClients = ({
                       {connector.client.fullname}
                     </td>
                     <td className="border py-1 text-right text-[16px]">
-                      {connector.client.id}
+                      {new Date(connector.createdAt).toLocaleDateString()}
                     </td>
                     <td className="border py-1 text-right text-[16px]">
                       {connector.client.phone}
@@ -178,10 +179,10 @@ export const TableClients = ({
                         </button>
                       ) : (
                         <button
-                          className="btn btn-primary py-0"
+                          className="btn btn-success py-0"
                           onClick={() => getPayment(connector)}
                         >
-                          <FontAwesomeIcon icon={faPenAlt} />
+                          <FontAwesomeIcon icon={faMoneyBill} />
                         </button>
                       )}
                     </td>}

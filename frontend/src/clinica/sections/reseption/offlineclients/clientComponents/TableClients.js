@@ -266,9 +266,8 @@ export const TableClients = ({
                     </td>
                     <td className="border py-1 text-center text-[16px]">
                       <button
-                        className={`${new Date(connector?.createdAt).toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10) ? "bg-green-500 border-green-500 hover:bg-green-400" : "bg-gray-400"} btn btn-success py-0`}
+                        className="bg-green-500 border-green-500 hover:bg-green-400 btn btn-success py-0"
                         onClick={() => {
-                          if (new Date(connector?.createdAt).toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10)) {
                             setClient({ ...connector.client })
                             setClientDate(connector.client.born.slice(0, 10))
                             setConnector({
@@ -279,7 +278,6 @@ export const TableClients = ({
                             setIsAddConnector(false);
                             setVisible(true);
                             setIsAddService(true)
-                          }
                         }}
                       >
                         <FontAwesomeIcon icon={faUserPen} />

@@ -118,7 +118,7 @@ export const DoctorClients = () => {
             Authorization: `Bearer ${auth.token}`,
           }
         );
-        let data2 = [...data].filter(connector => connector.services.filter(service => service.department._id === auth?.user?.specialty?._id && !service.department.probirka && service.accept).length < 1).sort((a, b) => b.services.filter(s => s.department._id === auth?.user?.specialty?._id)[0].turn - a.services.filter(s => s.department._id === auth?.user?.specialty?._id)[0].turn)
+        let data2 = [...data].sort((a, b) => b.services.filter(s => s.department._id === auth?.user?.specialty?._id)[0].turn - a.services.filter(s => s.department._id === auth?.user?.specialty?._id)[0].turn)
         let data3 = [...data2].filter(connector => !connector.connector.step)
         setDoctorClients(data3);
         setSearchStorage(data);
@@ -547,7 +547,7 @@ export const DoctorClients = () => {
     (e) => {
       const searching = [...searchStorage].filter((item) => {
         console.log(item);
-        return (item.client.firstname + item.client.lastname)
+        return (item.client.fullname)
           .toLowerCase()
           .includes(e.target.value.toLowerCase())
       });
@@ -811,20 +811,7 @@ export const DoctorClients = () => {
         description: "",
         status: "success",
       });
-      let arr = [...searchStorage].map(el => {
-        if (el.connector._id === id) {
-          el.connector.accept = true;
-        }
-        return el;
-      })
-      setSearchStorage(arr)
-      if (listType === 'nextsteps') {
-        setDoctorClients([...arr].filter(item => item.connector.step).sort((a, b) => new Date(a.connector.stepDate) - new Date(b.connector.stepDate)))
-      setCurrentDoctorClients([...arr].filter(item => item.connector.step).sort((a, b) => new Date(a.connector.stepDate) - new Date(b.connector.stepDate)))
-      } else {
-        setDoctorClients([...searchStorage].filter(el => !el.connector.step).filter(connector => connector.services.filter(service => service.department._id === auth?.user?.specialty?._id && !service.department.probirka && service.accept).length < 1))
-      setCurrentDoctorClients([...searchStorage].filter(el => !el.connector.step).filter(connector => connector.services.filter(service => service.department._id === auth?.user?.specialty?._id && !service.department.probirka && service.accept).length < 1))
-      }
+      getDoctorClients(beginDay, endDay)
     } catch (error) {
       notify({
         title: error,

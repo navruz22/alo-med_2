@@ -570,9 +570,7 @@ export const OnlineClientsDoctor = () => {
                                                             {currentPage * countPage + key + 1}
                                                         </td>
                                                         <td className="border py-1 font-weight-bold text-[16px]">
-                                                            {connector.lastname +
-                                                                " " +
-                                                                connector.firstname}
+                                                            {connector?.fullname}
                                                         </td>
                                                         <td className="border py-1 text-right text-[16px]">
                                                             +998{connector?.phone}
