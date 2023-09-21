@@ -253,6 +253,15 @@ export const Navbar = ({clinica}) => {
                         {t("Xizmatlarga bog'lash")}
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/alo24/products_report"
+                        onClick={() => setActivePage('/alo24/products_report')}
+                      >
+                        {t("Mahsulotlar hisoboti")}
+                      </Link>
+                    </li>
                   </ul>
                 </li>
               </ul>

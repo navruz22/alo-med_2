@@ -20,6 +20,10 @@ const product = new Schema(
             ref: 'Product',
             required: true,
         },
+        service: {
+            type: Schema.Types.ObjectId,
+            ref: 'OfflineService'
+        },
         product: {type: Object},
         pieces: {type: Number, required: true},
         refuse: {type: Boolean, default: false},
